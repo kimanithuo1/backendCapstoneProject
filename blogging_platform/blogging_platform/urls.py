@@ -14,8 +14,11 @@ urlpatterns = [
     # Admin
     path('admin/', admin.site.urls),
     
+    # Blog URLs (Template Views)
+    path('', include('blog.urls')),
+    
     # API endpoints
-    path('api/', include('blog.urls')),
+    path('api/', include('blog.urls', namespace='api')),
     
     # Authentication
     path('api-auth/', include('rest_framework.urls')),

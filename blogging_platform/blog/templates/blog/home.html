@@ -1,0 +1,257 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}Home - Blogging Platform{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title animate-fade-in">
+            Share Your <span class="gradient-text">Stories</span><br>
+            Connect With <span class="gradient-text">Readers</span>
+        </h1>
+        <p class="hero-subtitle animate-fade-in-delay">
+            A vibrant platform for bloggers, writers, and content creators to share their passion with the world.
+        </p>
+        <div class="hero-buttons animate-fade-in-delay-2">
+            {% if user.is_authenticated %}
+                <a href="{% url 'blog:post_create' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-pen"></i> Write a Post
+                </a>
+                <a href="{% url 'blog:post_list' %}" class="btn btn-outline btn-lg">
+                    <i class="fas fa-book-open"></i> Browse Posts
+                </a>
+            {% else %}
+                <a href="{% url 'blog:register' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-rocket"></i> Get Started
+                </a>
+                <a href="{% url 'blog:login' %}" class="btn btn-outline btn-lg">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="hero-illustration">
+        <div class="floating-card card-1">
+            <i class="fas fa-blog"></i>
+        </div>
+        <div class="floating-card card-2">
+            <i class="fas fa-heart"></i>
+        </div>
+        <div class="floating-card card-3">
+            <i class="fas fa-comment"></i>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3 class="stat-number">{{ total_posts }}</h3>
+                <p class="stat-label">Published Posts</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="stat-number">{{ total_users }}</h3>
+                <p class="stat-label">Active Writers</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3 class="stat-number">{{ total_comments }}</h3>
+                <p class="stat-label">Comments</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3 class="stat-number">{{ total_likes }}</h3>
+                <p class="stat-label">Likes</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Posts -->
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-fire"></i> Trending Posts
+            </h2>
+            <a href="{% url 'blog:post_list' %}" class="btn btn-outline">View All</a>
+        </div>
+        
+        <div class="posts-grid">
+            {% for post in trending_posts %}
+            <article class="post-card">
+                {% if post.featured_image %}
+                <div class="post-image">
+                    <img src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+                    <div class="post-overlay">
+                        <span class="category-badge">{{ post.category.name }}</span>
+                    </div>
+                </div>
+                {% else %}
+                <div class="post-image post-image-placeholder">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <div class="post-overlay">
+                        <span class="category-badge">{{ post.category.name }}</span>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <div class="post-content">
+                    <div class="post-meta">
+                        <img src="https://ui-avatars.com/api/?name={{ post.author.username }}&background=667eea&color=fff" 
+                             alt="{{ post.author.username }}" class="author-avatar">
+                        <div class="post-meta-info">
+                            <span class="author-name">{{ post.author.username }}</span>
+                            <span class="post-date">{{ post.published_date|date:"M d, Y" }}</span>
+                        </div>
+                    </div>
+                    
+                    <h3 class="post-title">
+                        <a href="{% url 'blog:post_detail' post.slug %}">{{ post.title }}</a>
+                    </h3>
+                    
+                    <p class="post-excerpt">{{ post.excerpt|truncatewords:20 }}</p>
+                    
+                    <div class="post-footer">
+                        <div class="post-stats">
+                            <span><i class="fas fa-eye"></i> {{ post.views_count }}</span>
+                            <span><i class="fas fa-heart"></i> {{ post.likes_count }}</span>
+                            <span><i class="fas fa-comment"></i> {{ post.comments_count }}</span>
+                        </div>
+                        <a href="{% url 'blog:post_detail' post.slug %}" class="read-more">
+                            Read More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {% empty %}
+            <div class="empty-state">
+                <i class="fas fa-inbox"></i>
+                <p>No posts yet. Be the first to write!</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Categories Section -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-folder-open"></i> Popular Categories
+            </h2>
+            <a href="{% url 'blog:category_list' %}" class="btn btn-outline">View All</a>
+        </div>
+        
+        <div class="categories-grid">
+            {% for category in popular_categories %}
+            <a href="{% url 'blog:category_posts' category.slug %}" class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-{% if category.name == 'Technology' %}laptop-code{% elif category.name == 'Travel' %}plane{% elif category.name == 'Food' %}utensils{% elif category.name == 'Health' %}heartbeat{% else %}tag{% endif %}"></i>
+                </div>
+                <h3>{{ category.name }}</h3>
+                <p>{{ category.posts_count }} posts</p>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="section">
+    <div class="container">
+        <div class="section-header centered">
+            <h2 class="section-title">
+                <i class="fas fa-star"></i> Why Choose BlogHub?
+            </h2>
+            <p class="section-subtitle">Everything you need to start your blogging journey</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-pen-fancy"></i>
+                </div>
+                <h3>Easy Writing</h3>
+                <p>Intuitive editor with markdown support and rich formatting options.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Build Community</h3>
+                <p>Connect with readers through comments, likes, and subscriptions.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Track Analytics</h3>
+                <p>Monitor your posts performance with detailed analytics.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Mobile Friendly</h3>
+                <p>Fully responsive design that works on all devices.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <h3>Notifications</h3>
+                <p>Stay updated with real-time notifications for engagement.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Secure Platform</h3>
+                <p>Your data is protected with enterprise-grade security.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Ready to Start Your Blogging Journey?</h2>
+            <p>Join thousands of writers sharing their stories on BlogHub</p>
+            {% if not user.is_authenticated %}
+            <a href="{% url 'blog:register' %}" class="btn btn-primary btn-lg">
+                <i class="fas fa-rocket"></i> Get Started for Free
+            </a>
+            {% else %}
+            <a href="{% url 'blog:post_create' %}" class="btn btn-primary btn-lg">
+                <i class="fas fa-pen"></i> Write Your First Post
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

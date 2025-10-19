@@ -21,6 +21,14 @@ from .serializers import (
     SubscriptionSerializer, NotificationSerializer
 )
 from .permissions import IsAuthorOrReadOnly, IsOwnerOrReadOnly, IsSubscriberOrReadOnly
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, logout, authenticate
+from django.contrib import messages
+from django.db.models import Count, Q
+from .models import BlogPost, Category, Tag, Comment, PostLike, PostRating
+from .serializers import BlogPostSerializer, UserSerializer
+
 
 
 class StandardResultsSetPagination(PageNumberPagination):
@@ -741,3 +749,357 @@ class NotificationViewSet(viewsets.ReadOnlyModelViewSet):
     def unread_count(self, request):
         count = self.get_queryset().filter(is_read=False).count()
         return Response({'unread_count': count})
+    
+
+
+def home_view(request):
+    """Home page with trending posts and stats"""
+    context = {
+        'trending_posts': BlogPost.objects.filter(status='published')
+            .select_related('author', 'category')
+            .prefetch_related('tags')
+            .annotate(likes_count=Count('likes'))
+            .order_by('-views_count', '-likes_count')[:6],
+        'popular_categories': Category.objects.annotate(
+            posts_count=Count('posts', filter=Q(posts__status='published'))
+        ).order_by('-posts_count')[:6],
+        'total_posts': BlogPost.objects.filter(status='published').count(),
+        'total_users': User.objects.count(),
+        'total_comments': Comment.objects.filter(is_approved=True).count(),
+        'total_likes': PostLike.objects.count(),
+    }
+    return render(request, 'blog/home.html', context)
+
+
+def post_list_view(request):
+    """List all published posts with filters"""
+    posts = BlogPost.objects.filter(status='published').select_related(
+        'author', 'category'
+    ).prefetch_related('tags')
+    
+    # Search
+    search_query = request.GET.get('search')
+    if search_query:
+        posts = posts.filter(
+            Q(title__icontains=search_query) |
+            Q(content__icontains=search_query) |
+            Q(author__username__icontains=search_query)
+        )
+    
+    # Filter by category
+    category_slug = request.GET.get('category')
+    if category_slug:
+        posts = posts.filter(category__slug=category_slug)
+    
+    # Filter by tag
+    tag_slug = request.GET.get('tag')
+    if tag_slug:
+        posts = posts.filter(tags__slug=tag_slug)
+    
+    # Sorting
+    sort_by = request.GET.get('sort', '-published_date')
+    posts = posts.order_by(sort_by)
+    
+    # Pagination
+    from django.core.paginator import Paginator
+    paginator = Paginator(posts, 12)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    context = {
+        'page_obj': page_obj,
+        'categories': Category.objects.all(),
+        'tags': Tag.objects.all(),
+        'search_query': search_query,
+        'selected_category': category_slug,
+        'selected_tag': tag_slug,
+    }
+    return render(request, 'blog/post_list.html', context)
+
+
+def post_detail_view(request, slug):
+    """Single post detail with comments"""
+    post = get_object_or_404(
+        BlogPost.objects.select_related('author', 'category')
+        .prefetch_related('tags', 'comments__author'),
+        slug=slug
+    )
+    
+    # Increment views
+    if not request.user.is_authenticated or request.user != post.author:
+        post.increment_views()
+    
+    # Get related posts
+    related_posts = BlogPost.objects.filter(
+        category=post.category,
+        status='published'
+    ).exclude(id=post.id)[:3]
+    
+    # Check if user has liked
+    user_has_liked = False
+    user_rating = None
+    if request.user.is_authenticated:
+        user_has_liked = PostLike.objects.filter(
+            post=post, user=request.user
+        ).exists()
+        try:
+            rating = PostRating.objects.get(post=post, user=request.user)
+            user_rating = rating.rating
+        except PostRating.DoesNotExist:
+            pass
+    
+    # Get comments (only parent comments)
+    comments = post.comments.filter(
+        is_approved=True, parent__isnull=True
+    ).select_related('author').prefetch_related('replies')
+    
+    context = {
+        'post': post,
+        'related_posts': related_posts,
+        'comments': comments,
+        'user_has_liked': user_has_liked,
+        'user_rating': user_rating,
+    }
+    return render(request, 'blog/post_detail.html', context)
+
+
+# ===== CATEGORY & TAG VIEWS =====
+
+def category_list_view(request):
+    """List all categories"""
+    categories = Category.objects.annotate(
+        posts_count=Count('posts', filter=Q(posts__status='published'))
+    )
+    context = {'categories': categories}
+    return render(request, 'blog/category_list.html', context)
+
+
+def category_posts_view(request, slug):
+    """Posts in a specific category"""
+    category = get_object_or_404(Category, slug=slug)
+    posts = BlogPost.objects.filter(
+        category=category,
+        status='published'
+    ).select_related('author').prefetch_related('tags')
+    
+    from django.core.paginator import Paginator
+    paginator = Paginator(posts, 12)
+    page_obj = paginator.get_page(request.GET.get('page'))
+    
+    context = {
+        'category': category,
+        'page_obj': page_obj,
+    }
+    return render(request, 'blog/category_posts.html', context)
+
+
+# ===== USER VIEWS =====
+
+def register_view(request):
+    """User registration"""
+    if request.user.is_authenticated:
+        return redirect('blog:home')
+    
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        password2 = request.POST.get('password2')
+        
+        if password != password2:
+            messages.error(request, 'Passwords do not match')
+            return render(request, 'blog/register.html')
+        
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username already exists')
+            return render(request, 'blog/register.html')
+        
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Email already exists')
+            return render(request, 'blog/register.html')
+        
+        user = User.objects.create_user(
+            username=username,
+            email=email,
+            password=password
+        )
+        
+        # Create profile
+        from .models import UserProfile
+        UserProfile.objects.create(user=user)
+        
+        login(request, user)
+        messages.success(request, 'Registration successful!')
+        return redirect('blog:home')
+    
+    return render(request, 'blog/register.html')
+
+
+def login_view(request):
+    """User login"""
+    if request.user.is_authenticated:
+        return redirect('blog:home')
+    
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, f'Welcome back, {username}!')
+            next_url = request.GET.get('next', 'blog:home')
+            return redirect(next_url)
+        else:
+            messages.error(request, 'Invalid username or password')
+    
+    return render(request, 'blog/login.html')
+
+
+def logout_view(request):
+    """User logout"""
+    logout(request)
+    messages.success(request, 'You have been logged out')
+    return redirect('blog:home')
+
+
+# ===== DASHBOARD VIEWS =====
+
+@login_required
+def dashboard_view(request):
+    """User dashboard"""
+    user_posts = BlogPost.objects.filter(author=request.user)
+    
+    context = {
+        'total_posts': user_posts.count(),
+        'published_posts': user_posts.filter(status='published').count(),
+        'draft_posts': user_posts.filter(status='draft').count(),
+        'total_views': sum(post.views_count for post in user_posts),
+        'total_likes': sum(post.likes_count for post in user_posts),
+        'recent_posts': user_posts.order_by('-created_at')[:5],
+    }
+    return render(request, 'blog/dashboard.html', context)
+
+
+@login_required
+def my_posts_view(request):
+    """User's posts list"""
+    posts = BlogPost.objects.filter(author=request.user).order_by('-created_at')
+    
+    from django.core.paginator import Paginator
+    paginator = Paginator(posts, 10)
+    page_obj = paginator.get_page(request.GET.get('page'))
+    
+    context = {'page_obj': page_obj}
+    return render(request, 'blog/my_posts.html', context)
+
+
+@login_required
+def post_create_view(request):
+    """Create new post"""
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        category_id = request.POST.get('category')
+        status = request.POST.get('status', 'draft')
+        tag_ids = request.POST.getlist('tags')
+        
+        post = BlogPost.objects.create(
+            title=title,
+            content=content,
+            author=request.user,
+            category_id=category_id,
+            status=status
+        )
+        
+        if tag_ids:
+            post.tags.set(tag_ids)
+        
+        if 'featured_image' in request.FILES:
+            post.featured_image = request.FILES['featured_image']
+            post.save()
+        
+        messages.success(request, 'Post created successfully!')
+        return redirect('blog:post_detail', slug=post.slug)
+    
+    context = {
+        'categories': Category.objects.all(),
+        'tags': Tag.objects.all(),
+    }
+    return render(request, 'blog/post_form.html', context)
+
+
+@login_required
+def post_edit_view(request, slug):
+    """Edit existing post"""
+    post = get_object_or_404(BlogPost, slug=slug, author=request.user)
+    
+    if request.method == 'POST':
+        post.title = request.POST.get('title')
+        post.content = request.POST.get('content')
+        post.category_id = request.POST.get('category')
+        post.status = request.POST.get('status', post.status)
+        
+        tag_ids = request.POST.getlist('tags')
+        if tag_ids:
+            post.tags.set(tag_ids)
+        
+        if 'featured_image' in request.FILES:
+            post.featured_image = request.FILES['featured_image']
+        
+        post.save()
+        messages.success(request, 'Post updated successfully!')
+        return redirect('blog:post_detail', slug=post.slug)
+    
+    context = {
+        'post': post,
+        'categories': Category.objects.all(),
+        'tags': Tag.objects.all(),
+    }
+    return render(request, 'blog/post_form.html', context)
+
+
+@login_required
+def post_delete_view(request, slug):
+    """Delete post"""
+    post = get_object_or_404(BlogPost, slug=slug, author=request.user)
+    
+    if request.method == 'POST':
+        post.delete()
+        messages.success(request, 'Post deleted successfully!')
+        return redirect('blog:my_posts')
+    
+    return render(request, 'blog/post_confirm_delete.html', {'post': post})
+
+
+@login_required
+def profile_view(request):
+    """User profile"""
+    profile = request.user.profile
+    
+    if request.method == 'POST':
+        request.user.first_name = request.POST.get('first_name', '')
+        request.user.last_name = request.POST.get('last_name', '')
+        request.user.email = request.POST.get('email', '')
+        request.user.save()
+        
+        profile.bio = request.POST.get('bio', '')
+        profile.website = request.POST.get('website', '')
+        profile.location = request.POST.get('location', '')
+        
+        if 'profile_picture' in request.FILES:
+            profile.profile_picture = request.FILES['profile_picture']
+        
+        profile.save()
+        messages.success(request, 'Profile updated successfully!')
+        return redirect('blog:profile')
+    
+    context = {'profile': profile}
+    return render(request, 'blog/profile.html', context)
+
+
+# ===== API DOCUMENTATION VIEW =====
+
+def api_docs_view(request):
+    """API documentation page"""
+    return render(request, 'blog/api_docs.html')

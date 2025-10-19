@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block meta_description %}Vibrant Blogging Platform - Share your stories{% endblock %}">
+    <title>{% block title %}Blogging Platform{% endblock %}</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'blog/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/components.css' %}">
+    {% block extra_css %}{% endblock %}
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="{% url 'blog:home' %}">
+                    <i class="fas fa-blog"></i>
+                    <span class="brand-text">BlogHub</span>
+                </a>
+            </div>
+            
+            <div class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="{% url 'blog:home' %}" class="nav-link">Home</a></li>
+                    <li><a href="{% url 'blog:post_list' %}" class="nav-link">Posts</a></li>
+                    <li><a href="{% url 'blog:category_list' %}" class="nav-link">Categories</a></li>
+                    <li><a href="{% url 'blog:api_docs' %}" class="nav-link">API Docs</a></li>
+                    
+                    {% if user.is_authenticated %}
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle">
+                                <i class="fas fa-user-circle"></i> {{ user.username }}
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="{% url 'blog:dashboard' %}" class="dropdown-item">
+                                    <i class="fas fa-dashboard"></i> Dashboard
+                                </a>
+                                <a href="{% url 'blog:my_posts' %}" class="dropdown-item">
+                                    <i class="fas fa-file-alt"></i> My Posts
+                                </a>
+                                <a href="{% url 'blog:profile' %}" class="dropdown-item">
+                                    <i class="fas fa-user"></i> Profile
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="{% url 'blog:logout' %}" class="dropdown-item">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li><a href="{% url 'blog:login' %}" class="nav-link btn-outline">Login</a></li>
+                        <li><a href="{% url 'blog:register' %}" class="nav-link btn-primary">Sign Up</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Messages -->
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            <span>{{ message }}</span>
+            <button class="alert-close">&times;</button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3><i class="fas fa-blog"></i> BlogHub</h3>
+                    <p>Your vibrant platform for sharing stories and connecting with readers worldwide.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'blog:home' %}">Home</a></li>
+                        <li><a href="{% url 'blog:post_list' %}">All Posts</a></li>
+                        <li><a href="{% url 'blog:category_list' %}">Categories</a></li>
+                        <li><a href="{% url 'blog:api_docs' %}">API Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">Lifestyle</a></li>
+                        <li><a href="#">Travel</a></li>
+                        <li><a href="#">Food</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get the latest posts and updates.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 BlogHub. All rights reserved. Built with Django & REST Framework</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{% static 'blog/js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
