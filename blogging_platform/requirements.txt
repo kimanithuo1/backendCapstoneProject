@@ -1,7 +1,49 @@
-Django>=5.0,<6.0
-djangorestframework>=3.14
-djangorestframework-simplejwt>=5.3
-django-cors-headers>=4.0
-django-filter>=23.0
-whitenoise>=6.0
-Pillow>=10.0
+# Django Core
+Django==4.2.7
+
+# Django REST Framework
+djangorestframework==3.14.0
+djangorestframework-simplejwt==5.3.0
+
+# Database
+mysqlclient==2.2.0
+
+# Filtering and Search
+django-filter==23.3
+
+# CORS Headers
+django-cors-headers==4.3.0
+
+# Image Processing
+Pillow==10.1.0
+
+# Environment Variables
+python-decouple==3.8
+
+# Production Server
+gunicorn==21.2.0
+
+# Static Files
+whitenoise==6.6.0
+
+# Markdown Support (optional)
+markdown==3.5.1
+
+# Timezone Support
+pytz==2023.3
+
+# For Development
+ipython==8.17.2
+django-debug-toolbar==4.2.0
+
+# Testing (optional)
+pytest==7.4.3
+pytest-django==4.7.0
+factory-boy==3.3.0
+
+# Code Quality (optional)
+flake8==6.1.0
+black==23.11.0
+
+# API Documentation (optional)
+drf-yasg==1.21.7
