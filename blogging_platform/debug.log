@@ -403,3 +403,201 @@ INFO 2025-10-20 01:09:01,946 basehttp "GET / HTTP/1.1" 200 11574
 INFO 2025-10-20 01:09:02,210 basehttp "GET /static/blog/css/components.css HTTP/1.1" 304 0
 INFO 2025-10-20 01:09:02,239 basehttp "GET /static/blog/css/base.css HTTP/1.1" 200 15961
 INFO 2025-10-20 01:09:02,274 basehttp "GET /static/blog/js/main.js HTTP/1.1" 304 0
+INFO 2025-10-20 01:11:13,279 autoreload Watching for file changes with StatReloader
+INFO 2025-10-20 01:14:09,287 basehttp "GET / HTTP/1.1" 200 11574
+INFO 2025-10-20 01:14:10,397 basehttp "GET /static/blog/css/base.css HTTP/1.1" 304 0
+INFO 2025-10-20 01:14:10,646 basehttp "GET /static/blog/css/components.css HTTP/1.1" 304 0
+INFO 2025-10-20 01:14:10,888 basehttp "GET /static/blog/js/main.js HTTP/1.1" 304 0
+INFO 2025-10-20 01:14:38,700 basehttp "GET /admin/ HTTP/1.1" 200 14906
+INFO 2025-10-20 01:14:39,539 basehttp "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO 2025-10-20 01:14:39,748 basehttp "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO 2025-10-20 01:14:39,945 basehttp "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+INFO 2025-10-20 01:14:40,094 basehttp "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+INFO 2025-10-20 01:14:40,232 basehttp "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+INFO 2025-10-20 01:14:40,308 basehttp "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+INFO 2025-10-20 01:14:40,408 basehttp "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+INFO 2025-10-20 01:14:40,559 basehttp "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+INFO 2025-10-20 01:14:40,560 basehttp "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+INFO 2025-10-20 01:15:09,409 basehttp "GET /admin/blog/blogpost/add/ HTTP/1.1" 200 29601
+INFO 2025-10-20 01:15:09,866 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-10-20 01:15:11,197 basehttp "GET /static/admin/css/forms.css HTTP/1.1" 200 8525
+INFO 2025-10-20 01:15:11,449 basehttp "GET /static/admin/js/calendar.js HTTP/1.1" 200 9141
+INFO 2025-10-20 01:15:11,465 basehttp "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9777
+INFO 2025-10-20 01:15:11,470 basehttp "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+INFO 2025-10-20 01:15:11,622 basehttp "GET /static/admin/css/widgets.css HTTP/1.1" 200 11973
+INFO 2025-10-20 01:15:11,722 basehttp "GET /static/admin/js/SelectBox.js HTTP/1.1" 200 4530
+INFO 2025-10-20 01:15:11,784 basehttp "GET /static/admin/js/actions.js HTTP/1.1" 200 8076
+INFO 2025-10-20 01:15:11,946 basehttp "GET /static/admin/js/SelectFilter2.js HTTP/1.1" 200 15845
+INFO 2025-10-20 01:15:11,960 basehttp "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO 2025-10-20 01:15:11,962 basehttp "GET /static/admin/js/core.js HTTP/1.1" 200 6208
+INFO 2025-10-20 01:15:12,098 basehttp "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+INFO 2025-10-20 01:15:12,353 basehttp "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+INFO 2025-10-20 01:15:12,739 basehttp "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+INFO 2025-10-20 01:15:12,828 basehttp "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 200 19319
+INFO 2025-10-20 01:15:13,084 basehttp "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+INFO 2025-10-20 01:15:13,208 basehttp "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581
+INFO 2025-10-20 01:15:13,410 basehttp "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 392
+INFO 2025-10-20 01:15:13,465 basehttp "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO 2025-10-20 01:15:13,949 basehttp "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO 2025-10-20 01:15:14,058 basehttp "GET /static/admin/img/selector-icons.svg HTTP/1.1" 200 3291
+INFO 2025-10-20 01:15:14,076 basehttp "GET /static/admin/img/icon-clock.svg HTTP/1.1" 200 677
+INFO 2025-10-20 01:15:14,077 basehttp "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 200 1086
+INFO 2025-10-20 08:48:33,756 autoreload Watching for file changes with StatReloader
+INFO 2025-10-20 08:49:23,324 autoreload Watching for file changes with StatReloader
+INFO 2025-10-20 08:49:28,984 basehttp "GET / HTTP/1.1" 200 11574
+INFO 2025-10-20 08:49:29,272 basehttp "GET /static/blog/css/base.css HTTP/1.1" 304 0
+INFO 2025-10-20 08:49:29,272 basehttp "GET /static/blog/css/components.css HTTP/1.1" 304 0
+INFO 2025-10-20 08:49:29,375 basehttp "GET /static/blog/js/main.js HTTP/1.1" 304 0
+WARNING 2025-10-20 08:49:30,516 log Not Found: /favicon.ico
+WARNING 2025-10-20 08:49:30,591 basehttp "GET /favicon.ico HTTP/1.1" 404 7769
+ERROR 2025-10-20 08:49:36,636 log Internal Server Error: /create/
+Traceback (most recent call last):
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\blog\views.py", line 1029, in post_create_view
+    return render(request, 'blog/post_form.html', context)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: blog/post_form.html
+ERROR 2025-10-20 08:49:36,648 basehttp "GET /create/ HTTP/1.1" 500 95942
+INFO 2025-10-20 08:50:05,043 basehttp "GET / HTTP/1.1" 200 11574
+INFO 2025-10-20 08:50:19,754 basehttp "GET /posts HTTP/1.1" 301 0
+ERROR 2025-10-20 08:50:19,960 log Internal Server Error: /posts/
+Traceback (most recent call last):
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\blog\views.py", line 817, in post_list_view
+    return render(request, 'blog/post_list.html', context)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: blog/post_list.html
+ERROR 2025-10-20 08:50:19,987 basehttp "GET /posts/ HTTP/1.1" 500 92827
+INFO 2025-10-20 08:50:35,117 basehttp "GET /admin/ HTTP/1.1" 200 14906
+INFO 2025-10-20 08:50:35,206 basehttp "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:35,208 basehttp "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:35,208 basehttp "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:35,209 basehttp "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:35,211 basehttp "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:35,219 basehttp "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:35,220 basehttp "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:35,245 basehttp "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:35,249 basehttp "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:41,124 basehttp "GET /admin/authtoken/tokenproxy/add/ HTTP/1.1" 200 15854
+INFO 2025-10-20 08:50:41,232 basehttp "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:41,232 basehttp "GET /static/admin/js/core.js HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:41,233 basehttp "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:41,233 basehttp "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:41,233 basehttp "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:41,280 basehttp "GET /static/admin/css/forms.css HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:41,351 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-10-20 08:50:41,373 basehttp "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:41,377 basehttp "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:41,384 basehttp "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:41,398 basehttp "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:41,399 basehttp "GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:41,491 basehttp "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:41,494 basehttp "GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+INFO 2025-10-20 08:50:47,688 basehttp "GET /admin/auth/user/add/?_to_field=id&_popup=1 HTTP/1.1" 200 8111
+INFO 2025-10-20 08:50:47,765 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-10-20 08:50:48,013 basehttp "GET /static/admin/css/unusable_password_field.css HTTP/1.1" 200 663
+INFO 2025-10-20 08:50:48,063 basehttp "GET /static/admin/js/unusable_password_field.js HTTP/1.1" 200 1480
+INFO 2025-10-20 08:51:05,448 basehttp "GET /admin/auth/group/add/ HTTP/1.1" 200 21876
+INFO 2025-10-20 08:51:05,520 basehttp "GET /static/admin/js/SelectBox.js HTTP/1.1" 304 0
+INFO 2025-10-20 08:51:05,521 basehttp "GET /static/admin/js/SelectFilter2.js HTTP/1.1" 304 0
+INFO 2025-10-20 08:51:05,525 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-10-20 08:51:05,586 basehttp "GET /static/admin/img/search.svg HTTP/1.1" 304 0
+INFO 2025-10-20 08:51:05,588 basehttp "GET /static/admin/img/selector-icons.svg HTTP/1.1" 304 0
+INFO 2025-10-20 08:51:20,480 basehttp "GET /admin/auth/user/add/ HTTP/1.1" 200 18626
+INFO 2025-10-20 08:51:20,561 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-10-20 08:51:49,385 log Not Found: /blog
+WARNING 2025-10-20 08:51:49,386 basehttp "GET /blog HTTP/1.1" 404 7748
+INFO 2025-10-20 08:52:13,483 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO 2025-10-20 08:52:13,538 basehttp "GET /admin/ HTTP/1.1" 200 14906
+INFO 2025-10-20 08:52:33,611 basehttp "GET / HTTP/1.1" 200 11574
+ERROR 2025-10-20 08:52:36,778 log Internal Server Error: /api-docs/
+Traceback (most recent call last):
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\blog\views.py", line 1105, in api_docs_view
+    return render(request, 'blog/api_docs.html')
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: blog/api_docs.html
+ERROR 2025-10-20 08:52:36,781 basehttp "GET /api-docs/ HTTP/1.1" 500 89348
+ERROR 2025-10-20 08:52:47,552 log Internal Server Error: /my-posts/
+Traceback (most recent call last):
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\blog\views.py", line 994, in my_posts_view
+    return render(request, 'blog/my_posts.html', context)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: blog/my_posts.html
+ERROR 2025-10-20 08:52:47,564 basehttp "GET /my-posts/ HTTP/1.1" 500 96578
+ERROR 2025-10-20 08:53:16,741 log Internal Server Error: /posts/
+Traceback (most recent call last):
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\blog\views.py", line 817, in post_list_view
+    return render(request, 'blog/post_list.html', context)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\user\backendCapstoneProject\blogging_platform\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: blog/post_list.html
+ERROR 2025-10-20 08:53:16,746 basehttp "GET /posts/ HTTP/1.1" 500 92978
+INFO 2025-10-20 08:54:08,023 basehttp "GET /api HTTP/1.1" 301 0
+INFO 2025-10-20 08:54:08,203 basehttp "GET /api/ HTTP/1.1" 200 7111
+INFO 2025-10-20 08:54:08,297 basehttp "GET /static/rest_framework/css/prettify.css HTTP/1.1" 200 817
+INFO 2025-10-20 08:54:08,300 basehttp "GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 200 3426
+INFO 2025-10-20 08:54:08,305 basehttp "GET /static/rest_framework/css/default.css HTTP/1.1" 200 1152
+INFO 2025-10-20 08:54:08,317 basehttp "GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 200 121457
+INFO 2025-10-20 08:54:08,361 basehttp "GET /static/rest_framework/js/csrf.js HTTP/1.1" 200 1793
+INFO 2025-10-20 08:54:08,418 basehttp "GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 200 39680
+INFO 2025-10-20 08:54:08,419 basehttp "GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 200 3796
+INFO 2025-10-20 08:54:08,473 basehttp "GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 200 13632
+INFO 2025-10-20 08:54:08,478 basehttp "GET /static/rest_framework/js/jquery-3.7.1.min.js HTTP/1.1" 200 87533
+INFO 2025-10-20 08:54:08,556 basehttp "GET /static/rest_framework/js/default.js HTTP/1.1" 200 1268
+INFO 2025-10-20 08:54:08,608 basehttp "GET /static/rest_framework/img/grid.png HTTP/1.1" 200 1458
+INFO 2025-10-20 08:54:08,608 basehttp "GET /static/rest_framework/js/load-ajax-form.js HTTP/1.1" 200 59
+INFO 2025-10-20 08:54:22,127 basehttp "GET /api/posts/ HTTP/1.1" 200 16748
+INFO 2025-10-20 08:54:22,538 basehttp "GET /static/rest_framework/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 200 18028
+INFO 2025-10-20 08:54:30,775 basehttp "GET /api/ HTTP/1.1" 200 7111
+WARNING 2025-10-20 08:55:20,933 log Not Found: /api/user
+WARNING 2025-10-20 08:55:20,936 basehttp "GET /api/user HTTP/1.1" 404 49611
+INFO 2025-10-20 08:55:33,493 basehttp "GET /api/users HTTP/1.1" 301 0
+INFO 2025-10-20 08:55:33,695 basehttp "GET /api/users/ HTTP/1.1" 200 13503
+INFO 2025-10-20 08:56:02,060 basehttp "GET /api/users/?format=api HTTP/1.1" 200 13651
+INFO 2025-10-20 08:56:06,306 basehttp "GET /api/users/?format=json HTTP/1.1" 200 194
